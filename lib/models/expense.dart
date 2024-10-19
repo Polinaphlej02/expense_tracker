@@ -1,13 +1,21 @@
+import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 const uuid = Uuid();
 
 enum Category {
   food,
-  traval,
+  travel,
   leisure,
   work,
 }
+
+const categoryIcons = {
+  Category.food: Icons.lunch_dining,
+  Category.leisure: Icons.movie,
+  Category.travel: Icons.flight_takeoff,
+  Category.work: Icons.work,
+};
 
 class Expense {
   Expense({
