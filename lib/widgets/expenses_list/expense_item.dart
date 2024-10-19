@@ -15,6 +15,7 @@ class ExpenseItem extends StatelessWidget {
           horizontal: 20
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(expense.title),
             SizedBox(height: 4,),
@@ -24,15 +25,15 @@ class ExpenseItem extends StatelessWidget {
                 const Spacer(), // takes all space between widgets (in Column or Row)
                 Row(
                   children: [
-                    Icon(Icons. alarm),
+                    Icon(categoryIcons[expense.category]),
                     SizedBox(width: 6,),
-                    Text(expense.date.toString())
+                    Text(expense.formatedDate)
                   ],
                 )
               ],
             )
           ],
-        )
+        ),
       ),
     );
   }

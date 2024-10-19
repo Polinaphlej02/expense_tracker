@@ -29,12 +29,28 @@ class _ExpensesState extends State<Expenses> {
       amount: 3.0,
       category: Category.food,
       date: DateTime.now(),
+    ),
+    Expense(
+      title: "PS5",
+      amount: 400.0,
+      category: Category.leisure,
+      date: DateTime.now(),
     )
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Expense tracker"),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.add)
+            )
+        ],
+      ),
       body: Column(
         children: [
           Expanded(child: ExpensesList(expenses: _registeredExpenses))

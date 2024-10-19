@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
 const uuid = Uuid();
+
+final formatter = DateFormat.yMd();
 
 enum Category {
   food,
@@ -27,4 +30,8 @@ class Expense {
   final double amount;
   final DateTime date;
   final Category category;
+
+  String get formatedDate {
+    return formatter.format(date);
+  }
 }
