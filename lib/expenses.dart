@@ -1,4 +1,5 @@
 import 'package:expense_tracker/widgets/expenses_list/expenses_list.dart';
+import 'package:expense_tracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
 
 import 'models/expense.dart';
@@ -38,18 +39,20 @@ class _ExpensesState extends State<Expenses> {
     )
   ];
 
+  void _openAddOverlay() {
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) => NewExpense(),
+      );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Expense tracker"),
         centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.add)
-            )
-        ],
+        actions: [IconButton(onPressed: _openAddOverlay, icon: Icon(Icons.add))],
       ),
       body: Column(
         children: [
