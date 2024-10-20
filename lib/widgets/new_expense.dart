@@ -20,6 +20,12 @@ class _NewExpenseState extends State<NewExpense> {
     super.dispose();
   }
 
+  void _datePicker() {
+    final now = DateTime.now();
+    final firstDate = DateTime(now.year - 1, now.month, now.day);
+    showDatePicker(context: context, firstDate: firstDate, lastDate: now, initialDate: now);
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -55,7 +61,7 @@ class _NewExpenseState extends State<NewExpense> {
                     const Text("Date"),
                     IconButton(
                       onPressed: () {
-
+                        _datePicker();
                       }, 
                       icon: Icon(Icons.calendar_month))
                   ],
