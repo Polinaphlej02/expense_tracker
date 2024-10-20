@@ -46,31 +46,53 @@ class _ExpensesState extends State<Expenses> {
   }
 
   void _removeExpense(Expense expense) {
+    final expenseInsex = _registeredExpenses.indexOf(expense);
     setState(() {
       _registeredExpenses.remove(expense);
     });
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(
+          duration: const Duration(seconds: 3),
+          action: SnackBarAction(label: "Undo", onPressed: () {
+            setState(() {
+              _registeredExpenses.insert(expenseInsex, expense); 
+            });
+          }),
+          content: const Text("Expense deleted")
+          ));
   }
 
   void _openAddOverlay() {
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
-      builder: (ctx) => NewExpense(addNewExpense: _addExpense,),
-      );
+      builder: (ctx) => NewExpense(
+        addNewExpense: _addExpense,
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget mainContent = const Center(child: Text("No expenses found."));
+
+    if (_registeredExpenses.isNotEmpty) {
+      mainContent = ExpensesList(
+        expenses: _registeredExpenses,
+        removeExpense: _removeExpense,
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Expense tracker"),
         centerTitle: true,
-        actions: [IconButton(onPressed: _openAddOverlay, icon: Icon(Icons.add))],
+        actions: [
+          IconButton(onPressed: _openAddOverlay, icon: Icon(Icons.add))
+        ],
       ),
       body: Column(
-        children: [
-          Expanded(child: ExpensesList(expenses: _registeredExpenses, removeExpense: _removeExpense,))
-        ],
+        children: [Expanded(child: mainContent)],
       ),
     );
   }
